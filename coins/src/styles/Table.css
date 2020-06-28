@@ -1,13 +1,14 @@
+/* .table-wrapper {
+    border: 1px solid red;
+} */
 .table {
     margin-top: 7vh;
     margin-left: 22.5%;
     width: 55%;
     background-color: #fff;
     border-collapse:collapse;
-    border: 1px solid rgba(128, 128, 128, .4);
     border-radius: 5px;
-    border-radius: 15px 15px 15px 15px;
-    padding-bottom: 20vh;
+    box-shadow: 0px 2px 15px rgba(24, 24, 24, 0.1);
 }
 thead {
     background-color: #F5F5F5;

@@ -1,9 +1,17 @@
+tr {
+    transition: .2s ease-in-out;
+}
+tr:hover {
+    background-color: rgba(241, 239, 239,.4);
+    transition: .2s ease-in-out;
+    cursor: pointer;
+}
 td {
     padding-left: 1vw;
     padding-right: 1vw;
-    padding-top: 1.25vh;
-    padding-bottom: 1.25vh;
-    border-bottom: 1px solid lightgrey!important;
+    padding-top: .5vh;
+    padding-bottom: .5vh;
+    border-bottom: 1px solid #f1efef!important;
     font-size: .95rem;
 }
 td img {
@@ -24,4 +32,16 @@ td img {
     margin-top: -2vh;
     font-size: .8rem;
     opacity: .7;
+}
+.positive {
+    color: #43C59E;
+}
+.negative {
+    color: #DE3C4B;
+}
+.positive-change {
+    background-color: rgba(67, 197, 158,.4)!important;
+}
+.negative-change {
+    background-color: rgba(222, 60, 75, .4)!important;
 }

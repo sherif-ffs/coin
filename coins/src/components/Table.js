@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from './Button'
 import TableRow from './TableRow'
+import LoadMore from './LoadMore'
 
 import '../styles/Table.css'
 
@@ -8,7 +8,7 @@ export default class Wrapper extends React.Component {
 
     state = {
         currencies: {},
-        limit: 20
+        limit: 10
     }
 
     async componentDidMount() {
@@ -23,11 +23,16 @@ export default class Wrapper extends React.Component {
             this.setState({
                 currencies: blocks,
             })
-          }, 10000);
+          }, 1500);
         } catch(e) {
           console.log(e);
         }
   }
+    loadMore = () => {
+        this.setState({
+            limit: this.state.limit + 20
+        })
+    }
 
     render() {
         let responseLoaded = false
@@ -35,7 +40,6 @@ export default class Wrapper extends React.Component {
         if (this.state.currencies[0]) {
             responseLoaded = true;
             tableRows = this.state.currencies.slice(0, this.state.limit).map(currency => {
-                console.log('currency: ', currency)
                 return(
                     <TableRow
                         key={currency.rank}
@@ -72,6 +76,7 @@ export default class Wrapper extends React.Component {
                         {tableRows}
                     </tbody> 
                 </table>
+                <LoadMore loadMore={this.loadMore}></LoadMore>
             </div>
         )
     }

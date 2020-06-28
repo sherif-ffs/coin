@@ -4,6 +4,7 @@
     width: 100vw;
     overflow-x: hidden;
     background-color: whitesmoke;
+    padding-bottom: 20vh;
   }
   
   body {
@@ -13,5 +14,5 @@
     min-width: 100%;
     border: none;
     background-color: whitesmoke;
-    font-family: Avenir, Lato, sans-serif
+    font-family: Avenir, Lato, sans-serif;
   }
