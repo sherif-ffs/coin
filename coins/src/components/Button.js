@@ -15,8 +15,7 @@ export default class Button extends React.Component {
     render() {
         return (
             <>
-            <button onClick={this.props.increaseCount}>Increment</button>
-            <button onClick={this.props.decreaseCount}>Decrement</button>
+            <button onClick={this.props.getCurrencies}>Refresh data</button>
             </>
         )
     }
