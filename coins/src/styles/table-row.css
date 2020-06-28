@@ -1,10 +1,27 @@
-.table-row {
-    border: 1px solid red;
-}
 td {
-    padding: 5px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 1.25vh;
+    padding-bottom: 1.25vh;
+    border-bottom: 1px solid lightgrey!important;
+    font-size: .95rem;
 }
 td img {
-    height: 20px;
-    width: 20px;
+    height: 2.5rem;
+    width: 2.5rem;
+    margin-top: 1.2vh;
+}
+.logo-name-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+.name-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: .6vw;
+}
+.id {
+    margin-top: -2vh;
+    font-size: .8rem;
+    opacity: .7;
 }

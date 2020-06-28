@@ -2,6 +2,8 @@ import React from 'react';
 import Button from './Button'
 import TableRow from './TableRow'
 
+import '../styles/Table.css'
+
 export default class Wrapper extends React.Component {
 
     state = {
@@ -33,6 +35,7 @@ export default class Wrapper extends React.Component {
         if (this.state.currencies[0]) {
             responseLoaded = true;
             tableRows = this.state.currencies.slice(0, this.state.limit).map(currency => {
+                console.log('currency: ', currency)
                 return(
                     <TableRow
                         key={currency.rank}
@@ -41,12 +44,15 @@ export default class Wrapper extends React.Component {
                         name={currency.name}
                         rank={currency.rank}
                         currency={currency.currency}
-                        change={currency.price_change_pct}
+                        id={currency.id}
+                        marketCap={currency.market_cap}
+                        supply={currency.circulating_supply}
+                        volume={currency['1d'] ? currency['1d'].volume : 'N/A' }
+                        change={currency['1d'] ? currency['1d'].price_change_pct : 'N/A'}
                     ></TableRow>
                 )
             })
         }
-            
         
         return (
             <div className="table-wrapper">
@@ -56,7 +62,10 @@ export default class Wrapper extends React.Component {
                             <th>Rank</th>
                             <th>Name</th> 
                             <th>Price</th>
-                            <th>Change(24hr)</th>
+                            <th>Market Cap</th>
+                            <th>Supply</th>
+                            <th>Volume (24hr)</th>
+                            <th>Change (24hr)</th>
                         </tr>
                     </thead>
                     <tbody className="table-body">
