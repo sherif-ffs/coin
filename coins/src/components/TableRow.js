@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/table-row.css'
+import numeral from 'numeral';
 
 export default class Row extends React.Component {
 
@@ -11,7 +12,6 @@ export default class Row extends React.Component {
 
     componentWillReceiveProps(newProps) {
         if (newProps.price == this.props.price) {
-            console.log('no change: ', newProps.name)
             this.setState({ 
                 positiveChange: false,
                 negativeChange: false,
@@ -19,14 +19,12 @@ export default class Row extends React.Component {
             })
         }
         else if (newProps.price > this.props.price) {
-            console.log('increase: ', newProps.name)
             this.setState({ 
                 positiveChange: true,
                 noChange: false
             })
         }
         else {
-            console.log('decrease: ', newProps.name)
             this.setState({ 
                 positiveChange: false,
                 noChange: false
@@ -50,13 +48,17 @@ export default class Row extends React.Component {
                             </div>
                         </div>
                     </td>
-                    <td>{this.props.price}</td>
-                    <td>{this.props.marketCap}</td>
-                    <td>{this.props.supply}</td>
-                    <td>{this.props.volume}</td>
+                    {/* <td>{this.props.price}</td> */}
+                    <td>{numeral(this.props.price).format('($ 0.00a)')}</td>
+                    {/* <td>{this.props.marketCap}</td> */}
+                    <td>{numeral(this.props.marketCap).format('0.00a')}</td>
+                    {/* <td>{this.props.supply}</td> */}
+                    <td>{numeral(this.props.supply).format('0.00a')}</td>
+                    {/* <td>{this.props.volume}</td> */}
+                    <td>{numeral(this.props.volume).format('0.00a')}</td>
                     {this.props.change < 0 ? 
-                    <td className="negative">{this.props.change}</td>
-                    : <td className="positive">{this.props.change}</td>
+                    <td className="negative">{numeral(this.props.change).format('0.00%')}</td>
+                    : <td className="positive">{numeral(this.props.change).format('0.00%')}</td>
                     }
                 </tr>
                 : (
