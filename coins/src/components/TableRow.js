@@ -48,14 +48,10 @@ export default class Row extends React.Component {
                             </div>
                         </div>
                     </td>
-                    {/* <td>{this.props.price}</td> */}
-                    <td>{numeral(this.props.price).format('($ 0.00a)')}</td>
-                    {/* <td>{this.props.marketCap}</td> */}
-                    <td>{numeral(this.props.marketCap).format('0.00a')}</td>
-                    {/* <td>{this.props.supply}</td> */}
+                    <td>${numeral(this.props.price).format('(0,0.00)')}</td>
+                    <td>${numeral(this.props.marketCap).format('0.00a')}</td>
                     <td>{numeral(this.props.supply).format('0.00a')}</td>
-                    {/* <td>{this.props.volume}</td> */}
-                    <td>{numeral(this.props.volume).format('0.00a')}</td>
+                    <td>${numeral(this.props.volume).format('0.00a')}</td>
                     {this.props.change < 0 ? 
                     <td className="negative">{numeral(this.props.change).format('0.00%')}</td>
                     : <td className="positive">{numeral(this.props.change).format('0.00%')}</td>
@@ -74,13 +70,13 @@ export default class Row extends React.Component {
                             </div>
                         </div>
                     </td>
-                    <td>{this.props.price}</td>
-                    <td>{this.props.marketCap}</td>
-                    <td>{this.props.supply}</td>
-                    <td>{this.props.volume}</td>
+                    <td>${numeral(this.props.price).format('(0,0.00)')}</td>
+                    <td>${numeral(this.props.marketCap).format('0.00a')}</td>
+                    <td>{numeral(this.props.supply).format('0.00a')}</td>
+                    <td>${numeral(this.props.volume).format('0.00a')}</td>
                     {this.props.change < 0 ? 
-                    <td className="negative">{this.props.change}</td>
-                    : <td className="positive">{this.props.change}</td>
+                    <td className="negative">{numeral(this.props.change).format('0.00%')}</td>
+                    : <td className="positive">{numeral(this.props.change).format('0.00%')}</td>
                     }
                 </tr>
                 : 
@@ -95,13 +91,13 @@ export default class Row extends React.Component {
                             </div>
                         </div>
                     </td>
-                    <td>{this.props.price}</td>
-                    <td>{this.props.marketCap}</td>
-                    <td>{this.props.supply}</td>
-                    <td>{this.props.volume}</td>
+                    <td>${numeral(this.props.price).format('(0,0.00)')}</td>
+                    <td>${numeral(this.props.marketCap).format('0.00a')}</td>
+                    <td>{numeral(this.props.supply).format('0.00a')}</td>
+                    <td>${numeral(this.props.volume).format('0.00a')}</td>
                     {this.props.change < 0 ? 
-                    <td className="negative">{this.props.change}</td>
-                    : <td className="positive">{this.props.change}</td>
+                    <td className="negative">{numeral(this.props.change).format('0.00%')}</td>
+                    : <td className="positive">{numeral(this.props.change).format('0.00%')}</td>
                     }
                 </tr>
                 )
