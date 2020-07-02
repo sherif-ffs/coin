@@ -8,30 +8,58 @@ export default class Wrapper extends React.Component {
 
     state = {
         currencies: {},
-        limit: 10
+        limit: 10,
+        sortByRank: false
     }
 
     async componentDidMount() {
         fetch(`https://api.nomics.com/v1/currencies/ticker?key=b5d23a53a23b59018cf74daf410dc556&interval=1d,30d&convert=USD`)
         .then(response => response.json())
-        .then(data => this.setState({ currencies: data}))
+        .then(data => this.setState({ currencies: data.slice(0, 20)}))
         try {
           setInterval(async () => {
             const res = await fetch('https://api.nomics.com/v1/currencies/ticker?key=b5d23a53a23b59018cf74daf410dc556&interval=1d,30d&convert=USD');
             const blocks = await res.json();
-
+            let currencies = []
+            if (this.state.sortByRank) {
+                currencies = blocks.slice(0, 20).sort((a,b) => b.rank - a.rank)
+            } else {
+                currencies = blocks.slice(0, 20).sort((a,b) => a.rank - b.rank)
+            }
             this.setState({
-                currencies: blocks,
+                currencies: currencies.slice(0, 20),
             })
           }, 1500);
         } catch(e) {
           console.log(e);
         }
-  }
+    }
     loadMore = () => {
         this.setState({
             limit: this.state.limit + 20
         })
+    }
+    sortByRank = () => {
+        // document.querySelector('.table-body').innerHTML = '';
+        const currencies = this.state.currencies
+        console.log('currencies: ', currencies)
+        let sortedCurrencies = []
+        if (this.state.sortByRank) {
+            sortedCurrencies = currencies.slice(0, 20).sort((a,b) => b.rank - a.rank)
+            this.setState({
+                currencies: sortedCurrencies,
+                sortByRank: false
+            })
+        } else {
+            sortedCurrencies = currencies.slice(0, 20).sort((a,b) => a.rank - b.rank)
+            this.setState({
+                currencies: sortedCurrencies,
+                sortByRank: true
+            })
+        }
+        // let sortedCurrencies = currencies.sort((a,b) => b.realRank - a.realRank)
+        // console.log('sortedCurrencies: ', sortedCurrencies)
+        
     }
 
     render() {
@@ -47,6 +75,7 @@ export default class Wrapper extends React.Component {
                         price={currency.price}
                         name={currency.name}
                         rank={currency.rank}
+                        realRank={currency.realRank}
                         currency={currency.currency}
                         id={currency.id}
                         marketCap={currency.market_cap}
@@ -63,7 +92,7 @@ export default class Wrapper extends React.Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>Rank</th>
+                            <th onClick={this.sortByRank}>Rank</th>
                             <th>Name</th> 
                             <th>Price</th>
                             <th>Market Cap</th>
