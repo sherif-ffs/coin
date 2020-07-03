@@ -48,7 +48,14 @@ export default class Row extends React.Component {
                             </div>
                         </div>
                     </td>
-                    <td>${numeral(this.props.price).format('(0,0.00)')}</td>
+                    <td>
+                        {
+                            this.props.price > .00001
+                            ? `$${numeral(this.props.price).format('(0,0.00)')}`
+                            : `$${this.props.price}`
+                        
+                        }
+                    </td>
                     <td>${numeral(this.props.marketCap).format('0.00a')}</td>
                     <td>{numeral(this.props.supply).format('0.00a')}</td>
                     <td>${numeral(this.props.volume).format('0.00a')}</td>
