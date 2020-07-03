@@ -1,6 +1,7 @@
 import React from 'react';
 import TableRow from './TableRow'
 import LoadMore from './LoadMore'
+import ResetButton from './ResetButton'
 
 import '../styles/Table.css'
 
@@ -106,7 +107,31 @@ export default class Wrapper extends React.Component {
             })
         }
     }
+
+    resetTable = () => {
+        // let currentCurrencies = this.state.currencies
+        // let currencies = currentCurrencies.slice(0, 1500).sort((a,b) => a.price - b.price)
+        // this.setState({
+        //     currencies: currencies
+        // })
+        fetch(`https://api.nomics.com/v1/currencies/ticker?key=b5d23a53a23b59018cf74daf410dc556&interval=1d,30d&convert=USD`)
+        .then(response => response.json())
+        .then(data => this.setState({ currencies: data.slice(0, 1500)}))
+
+        console.log('reset')
+        this.removeActiveClasses()
+    }
+
+    removeActiveClasses = () => {
+        setTimeout(function(){ 
+            let tableRows = document.querySelectorAll('tr')
+            tableRows.forEach(row => {
+                row.classList = 'table-row'
+            })
+        }, 1500);
+    }
     render() {
+        console.log('this.state.currencies: ', this.state.currencies)
         let responseLoaded = false
         let tableRows = []
         if (this.state.currencies[0]) {
@@ -133,6 +158,7 @@ export default class Wrapper extends React.Component {
         
         return (
             <div className="table-wrapper">
+                <ResetButton resetTable={this.resetTable}></ResetButton>
                 <table className="table">
                     <thead>
                         <tr>
