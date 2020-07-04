@@ -1,7 +1,6 @@
 import React from 'react';
 import TableRow from './TableRow'
 import LoadMore from './LoadMore'
-import ResetButton from './ResetButton'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import '../styles/Table.css'
@@ -17,34 +16,9 @@ export default class Wrapper extends React.Component {
     }
 
     async componentDidMount() {
-        fetch(`https://api.nomics.com/v1/currencies/ticker?key=b5d23a53a23b59018cf74daf410dc556&interval=1d,7d,30d,365d&convert=USD`)
-        .then(response => response.json())
-        .then(data => this.setState({ currencies: data.slice(0, 1500)}))
-        try {
-            const res = await fetch('https://api.nomics.com/v1/currencies/ticker?key=b5d23a53a23b59018cf74daf410dc556&interval=1d,7d,30d,365d&convert=USD');
-            const blocks = await res.json();
-            let currencies = []
-            if (this.state.sortByRank) {
-                currencies = blocks.slice(0, 1500).sort((a,b) => b.rank - a.rank)
-            } else if (!this.state.sortByRank) {
-                currencies = blocks.slice(0, 1500).sort((a,b) => a.rank - b.rank)
-            }
-            else if (!this.state.sortByRank && !this.state.sortByChange && this.state.sortByPrice) {
-                currencies = blocks.slice(0, 1500).sort((a,b) => b.price - a.price)
-            }
-            else if (!this.state.sortByRank && this.state.sortByChange && !this.state.sortByPrice) {
-                let filteredCurrencies = blocks.slice(0, 1500).filter(block => block['1d'].price_change_pct)
-                currencies = filteredCurrencies.slice(0, 1500).sort((a,b) => b['1d'].price_change_pct - a['1d'].price_change_pct)
-            }
-            else {
-                currencies = blocks.slice(0, 1500).sort((a,b) => a.price - b.price)
-            }
-            this.setState({
-                currencies: blocks.slice(0, 1500),
-            })
-        } catch(e) {
-          console.log(e);
-        }
+        this.setState({
+            currencies: this.props.currencies
+        })
     }
 
     loadMore = () => {
