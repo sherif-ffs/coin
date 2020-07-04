@@ -3,6 +3,7 @@ import TableRow from './TableRow'
 import LoadMore from './LoadMore'
 import ResetButton from './ResetButton'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
 import '../styles/Table.css'
 
 export default class Wrapper extends React.Component {
@@ -122,6 +123,7 @@ export default class Wrapper extends React.Component {
 
         console.log('reset')
         this.removeActiveClasses()
+        // document.querySelector('.reset-icon').style.
     }
 
     removeActiveClasses = () => {
@@ -160,7 +162,6 @@ export default class Wrapper extends React.Component {
         
         return (
             <div className="table-wrapper">
-                <ResetButton resetTable={this.resetTable}></ResetButton>
                 <table className="table">
                     <thead>
                         <tr>
@@ -186,6 +187,7 @@ export default class Wrapper extends React.Component {
                                     <ExpandMoreIcon className="change-expand-icon expand-icon" fontSize="medium"></ExpandMoreIcon>
                                 </div>
                             </th>
+                            <th className="reset-th"><AutorenewIcon className="reset-icon" onClick={this.resetTable}></AutorenewIcon></th>
                         </tr>
                     </thead>
                     <tbody className="table-body">

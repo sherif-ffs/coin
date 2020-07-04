@@ -63,6 +63,7 @@ export default class Row extends React.Component {
                     <td className="negative">{numeral(this.props.change).format('0.00%')}</td>
                     : <td className="positive">{numeral(this.props.change).format('0.00%')}</td>
                     }
+                    <td>{null}</td>
                 </tr>
                 : (
                     this.state.positiveChange ? 
@@ -85,6 +86,7 @@ export default class Row extends React.Component {
                     <td className="negative">{numeral(this.props.change).format('0.00%')}</td>
                     : <td className="positive">{numeral(this.props.change).format('0.00%')}</td>
                     }
+                    <td>{null}</td>
                 </tr>
                 : 
                 <tr className="table-row negative-change">
@@ -106,6 +108,7 @@ export default class Row extends React.Component {
                     <td className="negative">{numeral(this.props.change).format('0.00%')}</td>
                     : <td className="positive">{numeral(this.props.change).format('0.00%')}</td>
                     }
+                    <td>{null}</td>
                 </tr>
                 )
             }
