@@ -2,7 +2,7 @@ import React from 'react';
 import TableRow from './TableRow'
 import LoadMore from './LoadMore'
 import ResetButton from './ResetButton'
-
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import '../styles/Table.css'
 
 export default class Wrapper extends React.Component {
@@ -53,15 +53,19 @@ export default class Wrapper extends React.Component {
     }
     sortByRank = () => {
         const currencies = this.state.currencies
+        console.log('currencies: ', currencies)
         let sortedCurrencies = []
         if (this.state.sortByRank) {
-            sortedCurrencies = currencies.slice(0, 1500).sort((a,b) => b.rank - a.rank)
+            sortedCurrencies = currencies.slice(0, 1500).sort((a,b) => a.rank - b.rank)
+            document.querySelector('.rank-expand-icon').style.transform = 'rotate(180deg)'
             this.setState({
                 currencies: sortedCurrencies,
                 sortByRank: false
             })
         } else {
-            sortedCurrencies = currencies.slice(0, 1500).sort((a,b) => a.rank - b.rank)
+            sortedCurrencies = currencies.slice(0, 1500).sort((a,b) => b.rank - a.rank)
+            console.log('sortedCurrencies: ', sortedCurrencies)
+            document.querySelector('.rank-expand-icon').style.transform = 'rotate(0deg)'
             this.setState({
                 currencies: sortedCurrencies,
                 sortByRank: true
@@ -74,13 +78,14 @@ export default class Wrapper extends React.Component {
         let sortedCurrencies = []
         if (this.state.sortByPrice) {
             sortedCurrencies = currencies.slice(0, 1500).sort((a,b) => b.price - a.price)
+            document.querySelector('.price-expand-icon').style.transform = 'rotate(180deg)'
             this.setState({
                 currencies: sortedCurrencies,
                 sortByPrice: false
             })
         } else {
             sortedCurrencies = currencies.slice(0, 1500).sort((a,b) => a.price - b.price)
-            console.log('sortedCurrencies: ', sortedCurrencies)
+            document.querySelector('.price-expand-icon').style.transform = 'rotate(0deg)'
             this.setState({
                 currencies: sortedCurrencies,
                 sortByPrice: true
@@ -93,6 +98,7 @@ export default class Wrapper extends React.Component {
         if (this.state.sortByChange) {
             let filteredCurrencies = currencies.slice(0, 1500).filter(currency => currency['1d'] != null)
             sortedCurrencies = filteredCurrencies.slice(0, 1500).sort((a,b) => a['1d'].price_change_pct - b['1d'].price_change_pct)
+            document.querySelector('.change-expand-icon').style.transform = 'rotate(180deg)'
             this.setState({
                 currencies: sortedCurrencies,
                 sortByChange: false
@@ -101,6 +107,7 @@ export default class Wrapper extends React.Component {
             let filteredCurrencies = currencies.slice(0, 1500).filter(currency => currency['1d'] != null)
             console.log('filteredCurrencies: ', filteredCurrencies)
             sortedCurrencies = filteredCurrencies.sort((a,b) => b['1d'].price_change_pct - a['1d'].price_change_pct)
+            document.querySelector('.change-expand-icon').style.transform = 'rotate(0deg)'
             this.setState({
                 currencies: sortedCurrencies,
                 sortByChange: true
@@ -109,11 +116,6 @@ export default class Wrapper extends React.Component {
     }
 
     resetTable = () => {
-        // let currentCurrencies = this.state.currencies
-        // let currencies = currentCurrencies.slice(0, 1500).sort((a,b) => a.price - b.price)
-        // this.setState({
-        //     currencies: currencies
-        // })
         fetch(`https://api.nomics.com/v1/currencies/ticker?key=b5d23a53a23b59018cf74daf410dc556&interval=1d,30d&convert=USD`)
         .then(response => response.json())
         .then(data => this.setState({ currencies: data.slice(0, 1500)}))
@@ -130,8 +132,8 @@ export default class Wrapper extends React.Component {
             })
         }, 1500);
     }
+
     render() {
-        console.log('this.state.currencies: ', this.state.currencies)
         let responseLoaded = false
         let tableRows = []
         if (this.state.currencies[0]) {
@@ -162,13 +164,28 @@ export default class Wrapper extends React.Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th onClick={this.sortByRank}>Rank</th>
+                            <th onClick={this.sortByRank}>
+                                <div className="sort-by-rank-wrapper">
+                                    <p>Rank</p>
+                                    <ExpandMoreIcon className="rank-expand-icon expand-icon" fontSize="medium"></ExpandMoreIcon>
+                                </div>
+                            </th>
                             <th>Name</th> 
-                            <th onClick={this.sortByPrice}>Price</th>
+                            <th onClick={this.sortByPrice}>
+                                <div className="sort-by-rank-wrapper">
+                                    <p>Price</p>
+                                    <ExpandMoreIcon className="price-expand-icon expand-icon" fontSize="medium"></ExpandMoreIcon>
+                                </div>
+                            </th>
                             <th>Market Cap</th>
                             <th>Supply</th>
                             <th>Volume (24hr)</th>
-                            <th onClick={this.sortByChange}>Change (24hr)</th>
+                            <th onClick={this.sortByChange}>
+                                <div className="sort-by-rank-wrapper change-wrapper">
+                                    <p>Change (24hr)</p>
+                                    <ExpandMoreIcon className="change-expand-icon expand-icon" fontSize="medium"></ExpandMoreIcon>
+                                </div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody className="table-body">
