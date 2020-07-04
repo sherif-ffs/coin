@@ -17,11 +17,11 @@ export default class Wrapper extends React.Component {
     }
 
     async componentDidMount() {
-        fetch(`https://api.nomics.com/v1/currencies/ticker?key=b5d23a53a23b59018cf74daf410dc556&interval=1d,30d&convert=USD`)
+        fetch(`https://api.nomics.com/v1/currencies/ticker?key=b5d23a53a23b59018cf74daf410dc556&interval=1d,7d,30d,365d&convert=USD`)
         .then(response => response.json())
         .then(data => this.setState({ currencies: data.slice(0, 1500)}))
         try {
-            const res = await fetch('https://api.nomics.com/v1/currencies/ticker?key=b5d23a53a23b59018cf74daf410dc556&interval=1d,30d&convert=USD');
+            const res = await fetch('https://api.nomics.com/v1/currencies/ticker?key=b5d23a53a23b59018cf74daf410dc556&interval=1d,7d,30d,365d&convert=USD');
             const blocks = await res.json();
             let currencies = []
             if (this.state.sortByRank) {
@@ -54,7 +54,6 @@ export default class Wrapper extends React.Component {
     }
     sortByRank = () => {
         const currencies = this.state.currencies
-        console.log('currencies: ', currencies)
         let sortedCurrencies = []
         if (this.state.sortByRank) {
             sortedCurrencies = currencies.slice(0, 1500).sort((a,b) => a.rank - b.rank)
@@ -65,7 +64,6 @@ export default class Wrapper extends React.Component {
             })
         } else {
             sortedCurrencies = currencies.slice(0, 1500).sort((a,b) => b.rank - a.rank)
-            console.log('sortedCurrencies: ', sortedCurrencies)
             document.querySelector('.rank-expand-icon').style.transform = 'rotate(0deg)'
             this.setState({
                 currencies: sortedCurrencies,
@@ -106,7 +104,6 @@ export default class Wrapper extends React.Component {
             })
         } else {
             let filteredCurrencies = currencies.slice(0, 1500).filter(currency => currency['1d'] != null)
-            console.log('filteredCurrencies: ', filteredCurrencies)
             sortedCurrencies = filteredCurrencies.sort((a,b) => b['1d'].price_change_pct - a['1d'].price_change_pct)
             document.querySelector('.change-expand-icon').style.transform = 'rotate(0deg)'
             this.setState({
@@ -120,10 +117,7 @@ export default class Wrapper extends React.Component {
         fetch(`https://api.nomics.com/v1/currencies/ticker?key=b5d23a53a23b59018cf74daf410dc556&interval=1d,30d&convert=USD`)
         .then(response => response.json())
         .then(data => this.setState({ currencies: data.slice(0, 1500)}))
-
-        console.log('reset')
         this.removeActiveClasses()
-        // document.querySelector('.reset-icon').style.
     }
 
     removeActiveClasses = () => {
