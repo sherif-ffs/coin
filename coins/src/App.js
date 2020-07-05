@@ -21,11 +21,9 @@ class App extends React.Component {
   }
 
 render() {
-  console.log('this.state; ', this.state)
-  
   if (this.state.currencies.length > 0) {
     return (
-      <Dashboard currencies={this.state.currencies}></Dashboard>
+      <Dashboard currencies={this.state.currencies} marketCapYTD={this.state.marketCapYTD}></Dashboard>
     )
   } else {
     return (

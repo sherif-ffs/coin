@@ -136,14 +136,14 @@ export default class Wrapper extends React.Component {
                             <th onClick={this.sortByRank}>
                                 <div className="sort-by-rank-wrapper">
                                     <p>Rank</p>
-                                    <ExpandMoreIcon className="rank-expand-icon expand-icon" fontSize="medium"></ExpandMoreIcon>
+                                    <ExpandMoreIcon className="rank-expand-icon expand-icon" fontSize="default"></ExpandMoreIcon>
                                 </div>
                             </th>
                             <th>Name</th> 
                             <th onClick={this.sortByPrice}>
                                 <div className="sort-by-rank-wrapper">
                                     <p>Price</p>
-                                    <ExpandMoreIcon className="price-expand-icon expand-icon" fontSize="medium"></ExpandMoreIcon>
+                                    <ExpandMoreIcon className="price-expand-icon expand-icon" fontSize="default"></ExpandMoreIcon>
                                 </div>
                             </th>
                             <th>Market Cap</th>
@@ -152,7 +152,7 @@ export default class Wrapper extends React.Component {
                             <th onClick={this.sortByChange}>
                                 <div className="sort-by-rank-wrapper change-wrapper">
                                     <p>Change (24hr)</p>
-                                    <ExpandMoreIcon className="change-expand-icon expand-icon" fontSize="medium"></ExpandMoreIcon>
+                                    <ExpandMoreIcon className="change-expand-icon expand-icon" fontSize="default"></ExpandMoreIcon>
                                 </div>
                             </th>
                             <th className="reset-th"><AutorenewIcon className="reset-icon" onClick={this.resetTable}></AutorenewIcon></th>
