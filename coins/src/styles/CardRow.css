@@ -1,0 +1,35 @@
+.card-row {
+    display: flex;
+    flex-direction: row;
+    font-size: .8rem;
+    line-height: .55rem;
+}
+.card-row__number {
+    font-weight: 900;
+    color: #404040;
+    margin-left: 5%;
+    font-size: 1rem;
+}
+.card-row__name {
+    color: #404040;
+    margin-left: 5%;
+    opacity: .9;
+    font-weight: 500;
+    font-size: .9rem;
+}
+.card-row__symbol {
+    color: #404040;
+    margin-left: 2%;
+    margin-top: 3.5%;
+    font-weight: 900;
+    opacity: .6;
+    font-size: .75rem;
+}
+.card-row__change {
+    margin-left: auto;
+    margin-right: 5%;
+    color: #43C59E;
+    font-weight: 500;
+    font-size: .95rem;
+    text-align: right;
+}

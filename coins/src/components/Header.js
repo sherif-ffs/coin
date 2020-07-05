@@ -1,5 +1,7 @@
 import React from 'react'
 import '../styles/Header.css'
+import HotCurrenciesCard from './HotCurrenciesCard' 
+import MarketCapCard from './MarketCapCard';
 
 export default class Header extends React.Component {
 
@@ -42,14 +44,20 @@ export default class Header extends React.Component {
         })
     }
     render() {
-        return (
-            <div className="header">
-                <div className="header-cards-wrapper">
-                    <div className="header-card"></div>
-                    <div className="header-card"></div>
+        console.log('this.state: ', this.state)
+        if (this.state.hottestCurrencies.length > 1 && this.state.marketCapGainers.length > 1) {
+            return (
+                <div className="header">
+                    <div className="header-cards-wrapper">
+                        <HotCurrenciesCard hotCurrencies={this.state.hottestCurrencies}></HotCurrenciesCard>
+                        <MarketCapCard marketCapGainers={this.state.marketCapGainers}></MarketCapCard>
+                    </div>
+                    <div className="header-chart-wrapper"></div>
                 </div>
-                <div className="header-chart-wrapper"></div>
-            </div>
-        )
+            )
+        } else {
+            return null
+        }
+        
     }
 }
