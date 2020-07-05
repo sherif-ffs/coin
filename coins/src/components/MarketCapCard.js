@@ -28,7 +28,7 @@ export default class MarketCapCard extends React.Component {
         })
         return (
             <div className="header-card market-cap">
-                <h1 className="header-card__title">% Market Cap Gainers</h1>
+                <h1 className="header-card__title">% Volume Gainers</h1>
                 {marketCapGainers}
             </div>
         )

@@ -4,7 +4,6 @@ import '../styles/CardRow.css'
 export default class CardRow extends React.Component {
 
     render() {
-        console.log('this.props: ', this.props)
         return (
             <div className="card-row">
                 <p className="card-row__number">{this.props.number + 1}</p>

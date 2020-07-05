@@ -2,6 +2,7 @@ import React from 'react'
 import '../styles/Header.css'
 import HotCurrenciesCard from './HotCurrenciesCard' 
 import MarketCapCard from './MarketCapCard';
+import HeaderChart from './HeaderChart'
 
 export default class Header extends React.Component {
 
@@ -23,13 +24,14 @@ export default class Header extends React.Component {
 
         let marketCapGainers = []
         this.props.marketCapGainers.forEach(currency => {
+            console.log('currency: ', currency)
             marketCapGainers.push({
                 name: currency.name,
                 symbol: currency.symbol,
-                change: currency['1d'].market_cap_change_pct
+                change: currency['1d'].volume_change_pct
             })
         })
-
+        console.log('marketCapGainers: ', marketCapGainers)
         let marketCapYTD = []
         this.props.marketCapYTD.forEach(currency => {
             marketCapYTD.push({
@@ -52,7 +54,9 @@ export default class Header extends React.Component {
                         <HotCurrenciesCard hotCurrencies={this.state.hottestCurrencies}></HotCurrenciesCard>
                         <MarketCapCard marketCapGainers={this.state.marketCapGainers}></MarketCapCard>
                     </div>
-                    <div className="header-chart-wrapper"></div>
+                    <div className="header-chart-wrapper">
+                        <HeaderChart></HeaderChart>
+                    </div>
                 </div>
             )
         } else {
